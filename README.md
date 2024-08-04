@@ -1,2 +1,2 @@
 # offc
-An off-heap-container lib in Go
+An offheap-container lib in Go
