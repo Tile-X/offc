@@ -41,11 +41,25 @@ func ReallocSlice[T any](slice []T, newSize uint) []T {
 }
 
 // Free will free the memories allocated by Alloc
+// NOTE: Do not use the pointer after free
 func Free[T any](t *T) {
 	free(unsafe.Pointer(t))
 }
 
 // FreeSlice will free the slice allocated by AllocSlice, CallocSlice or ReallocSlice
+// NOTE: Do not use the slice after free
 func FreeSlice[T any](slice []T) {
 	free(unsafe.Pointer(&slice[0]))
+}
+
+// Release will set the pointer to nil after freeing the memories
+func Release[T any](t **T) {
+	Free(*t)
+	*t = nil
+}
+
+// ReleaseSlice will set the pointer to nil after freeing the slice
+func ReleaseSlice[T any](slice *[]T) {
+	FreeSlice(*slice)
+	*slice = nil
 }
