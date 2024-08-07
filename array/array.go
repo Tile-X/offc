@@ -185,23 +185,26 @@ func (a *Array[T]) InsertAfter(i int, v T) {
 }
 
 // PopFront pop the first element of array
-func (a *Array[T]) PopFront() {
+func (a *Array[T]) PopFront() T {
 	a.emptyCheck()
 	a.cycleShiftLeft(0)
 	a.len--
+	return a.data[a.len]
 }
 
 // PopBack pop the last element of array
-func (a *Array[T]) PopBack() {
+func (a *Array[T]) PopBack() T {
 	a.emptyCheck()
 	a.len--
+	return a.data[a.len]
 }
 
 // RemoveAt remove the element at index
-func (a *Array[T]) RemoveAt(index int) {
+func (a *Array[T]) RemoveAt(index int) T {
 	a.rangeCheck(index)
 	a.cycleShiftLeft(index)
 	a.len--
+	return a.data[a.len]
 }
 
 // RemoveAll remove all the elements in array
